@@ -17,7 +17,7 @@ httpGetAsync('GET','https://api.github.com/repos/Bejofo/gitdatabasetest/contents
   var j = JSON.parse(x);
   sha = j.sha;
   document.getElementById("display").innerText = atob(j.content.replace(/\s/g,''));
-  document.getElementById("save").disabled = true;
+  document.getElementById("save").disabled = false;
 })
 function save(){
   var content = bota(document.getElementById("display").innerText);
