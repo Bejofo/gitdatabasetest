@@ -22,7 +22,7 @@ httpGetAsync('GET','https://api.github.com/repos/Bejofo/gitdatabasetest/contents
 function save(){
   var content = btoa(document.getElementById("display").value);
   var message = "Added something"
-  var url = `https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt?sha=${sha}&message=${message}&content=${content}`
+  var url = encodeURI(`https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt?sha=${sha}&message=${message}&content=${content}`)
   httpGetAsync('PUT',url,x=>{})
 }
 </script>
