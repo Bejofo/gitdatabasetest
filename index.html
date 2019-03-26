@@ -16,7 +16,7 @@ function httpGetAsync(m,theUrl, callback)
 httpGetAsync('GET','https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt',x=>{
   console.log(x);
   sha = x.sha;
-  document.getElementById("display").innerText = atob(x.content);
+  document.getElementById("display").innerText = atob(x.content.replace(/\s/g,''));
   document.getElementById("save").disabled = true;
 })
 function save(){
