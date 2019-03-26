@@ -1,0 +1,21 @@
+<textarea id="display" rows="10" cols="30"></textarea>
+<button id="save" onclick="save()" disabled></button>
+<script>
+function httpGetAsync(theUrl, callback)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}
+httpGetAsync('https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt',x=>{
+  document.getElementById("display").innerText = x;
+  document.getElementById("save").disabled = true;
+})
+save(){
+  //todo
+}
+</script>
