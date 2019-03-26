@@ -1,21 +1,27 @@
 <textarea id="display" rows="10" cols="30"></textarea>
 <button id="save" onclick="save()" disabled></button>
 <script>
-function httpGetAsync(theUrl, callback)
+function httpGetAsync(m,theUrl, callback)
 {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
             callback(xmlHttp.responseText);
     }
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.open(m, theUrl, true); // true for asynchronous 
     xmlHttp.send(null);
 }
-httpGetAsync('https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt',x=>{
-  document.getElementById("display").innerText = x;
+    
+
+httpGetAsync('GET','https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt',x=>{
+  sha = x.sha;
+  document.getElementById("display").innerText = atob(x.content);
   document.getElementById("save").disabled = true;
 })
 function save(){
-  //todo
+  var content = bota(document.getElementById("display").innerText);
+  var message = "Added something"
+  var url = `https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt?sha={sha}&message={message}&content={content}`
+  httpGetasync('PUT',url,x=>{})
 }
 </script>
