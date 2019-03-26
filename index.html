@@ -16,11 +16,11 @@ function httpGetAsync(m,theUrl, callback)
 httpGetAsync('GET','https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt',x=>{
   var j = JSON.parse(x);
   sha = j.sha;
-  document.getElementById("display").innerText = atob(j.content.replace(/\s/g,''));
+  document.getElementById("display").value = atob(j.content.replace(/\s/g,''));
   document.getElementById("save").disabled = false;
 })
 function save(){
-  var content = btoa(document.getElementById("display").innerText);
+  var content = btoa(document.getElementById("display").value);
   var message = "Added something"
   var url = `https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt?sha=${sha}&message=${message}&content=${content}`
   httpGetAsync('PUT',url,x=>{})
