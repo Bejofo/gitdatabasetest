@@ -8,7 +8,8 @@ function httpGetAsync(m,theUrl, b,callback)
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
             callback(xmlHttp.responseText);
     }
-    xmlHttp.open(m, theUrl, true); // true for asynchronous 
+    xmlHttp.open(m, theUrl, true); // true for asynchronous
+    xmlHttp.setRequestHeader("Content-type", "application/json");
     xmlHttp.send(b);
 }
     
