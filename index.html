@@ -1,7 +1,7 @@
 <textarea id="display" rows="10" cols="30"></textarea>
 <button id="save" onclick="save()" disabled>Save</button>
 <script>
-function httpGetAsync(m,theUrl, callback)
+function httpGetAsync(m,theUrl, b,callback)
 {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
@@ -9,11 +9,11 @@ function httpGetAsync(m,theUrl, callback)
             callback(xmlHttp.responseText);
     }
     xmlHttp.open(m, theUrl, true); // true for asynchronous 
-    xmlHttp.send(null);
+    xmlHttp.send(b);
 }
     
 
-httpGetAsync('GET','https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt',x=>{
+httpGetAsync('GET','https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt',null,x=>{
   var j = JSON.parse(x);
   sha = j.sha;
   document.getElementById("display").value = atob(j.content.replace(/\s/g,''));
@@ -22,7 +22,11 @@ httpGetAsync('GET','https://api.github.com/repos/Bejofo/gitdatabasetest/contents
 function save(){
   var content = btoa(document.getElementById("display").value);
   var message = "Added something"
-  var url = encodeURI(`https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt?sha=${sha}&message=${message}&content=${content}`)
-  httpGetAsync('PUT',url,x=>{})
+  var url = `https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt`
+  httpGetAsync('PUT',url,{
+    content:content,
+    message:message,
+    sha:sha
+  },x=>{})
 }
 </script>
