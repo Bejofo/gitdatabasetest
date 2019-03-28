@@ -29,6 +29,9 @@ function save(){
     content:content,
     message:message,
     sha:sha
-  }),x=>{})
+  }),x=>{
+    var j = JSON.parse(x);
+    sha = j.content.sha;
+  })
 }
 </script>
