@@ -1,6 +1,7 @@
 <textarea id="display" rows="10" cols="30"></textarea>
 <button id="save" onclick="save()" disabled>Save</button>
 <script>
+var token = prompt('access_token')
 function httpGetAsync(m,theUrl, b,callback)
 {
     var xmlHttp = new XMLHttpRequest();
@@ -23,7 +24,7 @@ httpGetAsync('GET','https://api.github.com/repos/Bejofo/gitdatabasetest/contents
 function save(){
   var content = btoa(document.getElementById("display").value);
   var message = "Added something"
-  var url = `https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt`
+  var url = `https://api.github.com/repos/Bejofo/gitdatabasetest/contents/data.txt?access_token=`+token;
   httpGetAsync('PUT',url,JSON.stringify({
     content:content,
     message:message,
